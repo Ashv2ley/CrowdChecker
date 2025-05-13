@@ -21,7 +21,7 @@ export default function Onboarding() {
                 />
                 <View className="w-full px-4">
                     {onboardingMode === 1 && (
-                        <View className="flex-col justify-between">
+                        <View className="space-y-20">
                             {/* First Name and Last Name */}
                             <View className="flex-row w-full">
                                 <View className="flex-1 mr-2">
@@ -44,7 +44,7 @@ export default function Onboarding() {
                             {/* Password */}
                             <View>
                                 <Text className="mb-1 font-medium">Password</Text>
-                                <TextInput className="border-2 border-gray rounded-full p-4 w-full" />
+                                <TextInput className="border-2 border-gray rounded-full p-4 w-full"/>
                             </View>
 
                             {/* Confirm Password */}
