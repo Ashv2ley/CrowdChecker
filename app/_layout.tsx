@@ -1,9 +1,7 @@
 import { Stack } from "expo-router";
 import './global.css'
 import {useState, useEffect} from "react";
-import SplashScreen from "@/app/SplashScreen";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Splash from "@/app/splash";
 
 export default function RootLayout() {
 
@@ -15,7 +13,7 @@ export default function RootLayout() {
   });
 
   return (
-            loading ? (<SplashScreen/>) : (
+            loading ? (<Splash/>) : (
             <Stack>
                 <Stack.Screen
                     name="index"

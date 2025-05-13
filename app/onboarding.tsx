@@ -7,18 +7,17 @@ export default function Onboarding() {
         setOnboardingMode(value)
     }
     return (
-        <SafeAreaView>
-            <View>
-                <Text>Get Started Now</Text>
+        <SafeAreaView className={"p-10"}>
+            <View className={"gap-4 justify-center items-center p-10"}>
+                <Text className={"text-3xl font-bold"}>Get Started Now</Text>
                 <Text>Create an account or log in to explore our app</Text>
-                <CustomSwitch
-                    selectionMode={1}
-                    option1={"Sign Up"}
-                    option2={"Log In"}
-                    onSelectSwitch={onSelectSwitch}
-                />
             </View>
-
+            <CustomSwitch
+                selectionMode={1}
+                option1={"Sign Up"}
+                option2={"Log In"}
+                onSelectSwitch={onSelectSwitch}
+            />
             {onboardingMode === 1 && (<Text>signup</Text>)}
             {onboardingMode === 2 && (<Text>login</Text>)}
 
