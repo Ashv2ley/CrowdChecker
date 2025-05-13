@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "crowd-checker",
-    "slug": "crowd-checker",
+    "name": "crowdy",
+    "slug": "crowdy",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/crowdy-icon.png",
     "scheme": "crowdchecker",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -15,8 +15,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true
+      }
     },
     "web": {
       "bundler": "metro",
@@ -28,7 +27,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/crowdy-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
