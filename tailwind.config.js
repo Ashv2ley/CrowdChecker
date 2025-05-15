@@ -12,6 +12,7 @@ module.exports = {
       'dark-yellow': '#FFC571',
       'yellow': '#FAD5A0',
       'gray': '#D7D7D7AB',
+      'dark-gray': '#6D6D6D',
       'white': '#FFFFFF',
     },
     extend: {},
