@@ -1,10 +1,12 @@
-import { View, Text } from "react-native";
+import {View, Text, SafeAreaView} from "react-native";
 
 export default function Profile() {
 
     return (
-        <View>
-            <Text>Profile</Text>
-        </View>
+        <SafeAreaView>
+            <View>
+                <Text>Profile</Text>
+            </View>
+        </SafeAreaView>
     );
 }

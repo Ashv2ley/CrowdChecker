@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Text, Image, Animated, StyleSheet } from 'react-native';
+import { View, Image, Animated, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -24,7 +24,7 @@ export default function Splash() {
             }),
             Animated.timing(fadeAnim, {
                 toValue: 1,
-                duration: 2800,
+                duration: 1800,
                 useNativeDriver: true,
             }),
         ]).start();

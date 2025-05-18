@@ -1,6 +1,7 @@
-import {View, Text, SafeAreaView, TextInput} from "react-native";
+import {View, Text, SafeAreaView, TextInput, Platform} from "react-native";
 import CustomSwitch from "@/app/components/CustomSwitch"
 import CustomButton from "@/app/components/CustomButton"
+import * as AppleAuthentication from 'expo-apple-authentication';
 import {useState} from "react";
 
 export default function Onboarding() {
@@ -55,7 +56,7 @@ export default function Onboarding() {
                                 <TextInput className="border-2 border-gray rounded-full p-4 w-full" />
                             </View>
                             {/* Sign Up Button */}
-                            <CustomButton text={"Sign Up"} pageNav={"verification"} bgColor={"bg-dark-red"}/>
+                            <CustomButton text={"Sign Up"} pageNav={"verification"} bgColor={"bg-dark-red"} />
                         </View>
                     )}
 
@@ -90,8 +91,16 @@ export default function Onboarding() {
                             </View>
 
                             {/*Native Login */}
+                            {Platform.OS === 'ios' && (
+                                <View>
+
+                                </View>
+                            )}
 
                             {/* Google Login */}
+
+                            {/* Google Login */}
+
                         </View>
                     )}
                 </View>
