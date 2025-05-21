@@ -1,10 +1,27 @@
 import {View, Text, SafeAreaView, TextInput, Platform} from "react-native";
 import CustomSwitch from "@/app/components/CustomSwitch"
 import CustomButton from "@/app/components/CustomButton"
-import data from "../data.json"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import rawData from "../data.json"
 import {useState} from "react";
+import { Data } from '@/data';
+import { useRouter } from 'expo-router'
 
 export default function Onboarding() {
+    type User = {
+        firstname: string;
+        lastname: string;
+        email: string;
+        password: string;
+        isVerified: boolean;
+        isRemembered: boolean;
+        isLoggedIn: boolean;
+        timeJoined: string;
+        image: string;
+        preferences: {};
+    };
+    const data: Data = rawData;
+    const router = useRouter();
     const [onboardingMode, setOnboardingMode] = useState<Number>(1)
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
@@ -15,17 +32,15 @@ export default function Onboarding() {
 
     const handleConfirmPassword = () => {
         if (password !== confirmPassword) {
-            console.log("Passwords don't match!");
-            return;
+            setErrorMessage("Passwords don't match!");
+            return false;
         }
+        return true;
     }
-    const handleSignUp = (e: React.FormEvent<HTMLFormElement>) =>{
+    const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
-        const existing = data.users.filter((user) => user.email === email);
-        if (existing) {
-            console.log("Email already exists!");
-            return;
-        } else{
+        const existing = data.users.find((user:User) => user.email === email);
+        if (!existing && handleConfirmPassword()){
             const user = {
                 "firstname": firstname,
                 "lastname": lastname,
@@ -33,24 +48,30 @@ export default function Onboarding() {
                 "password": confirmPassword,
                 "isVerified": false,
                 "isRemembered": false,
+                "isLoggedIn": true,
                 "timeJoined": Date.now().toString(),
                 "image": "https://th.bing.com/th/id/OIP.hmLglIuAaL31MXNFuTGBgAHaHa?rs=1&pid=ImgDetMain",
                 "preferences": {}
             }
             data.users.push(user);
-            localStorage.setItem("user", JSON.stringify(user));
-        }
-    }
-    const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const user = data.users.filter((user) => user.email === email)
-        if (user) {
-            localStorage.setItem("user", JSON.stringify(user));
-        } else {
-            console.log("Account does not exists!");
+            await AsyncStorage.setItem("user", JSON.stringify(user));
+            router.push("/verification")
+        } else{
+            console.log("Email already exists!");
             return;
         }
-
+    }
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const user = data.users.find((user:User) => user.email === email);
+        if (user) {
+            user.isLoggedIn = true;
+            await AsyncStorage.setItem("user", JSON.stringify(user));
+            router.push("/verification")
+        } else {
+            setErrorMessage("Account does not exists!");
+            return;
+        }
     }
     const onSelectSwitch = (value:Number) => {
         setOnboardingMode(value)
@@ -102,7 +123,7 @@ export default function Onboarding() {
                                 <TextInput className="border-2 border-gray rounded-full p-4 w-full" onChangeText={(text)=> setConfirmPassword(text)}/>
                             </View>
                             {/* Sign Up Button */}
-                            <CustomButton text={"Sign Up"} pageNav={"verification"} bgColor={"bg-dark-red"}/>
+                            <CustomButton text={"Sign Up"} bgColor={"bg-dark-red"} onPress={handleSignUp}/>
                             <View className={"p-2"}>
                                 {errorMessage.length > 0 && (
                                     <Text className={"text-dark-red"}>
@@ -132,7 +153,7 @@ export default function Onboarding() {
                             </View>
 
                             {/* Log In Button */}
-                            <CustomButton text={"Log In"} pageNav={"verification"} bgColor={"bg-dark-yellow"}/>
+                            <CustomButton text={"Log In"} bgColor={"bg-dark-yellow"} onPress={handleLogin}/>
 
                             {/* Divider */}
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>

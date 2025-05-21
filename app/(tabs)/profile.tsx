@@ -1,13 +1,27 @@
 import {View, Text, SafeAreaView, Image, TouchableOpacity} from "react-native";
 import React, {useEffect, useState} from "react";
-import data from "@/data.json";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Profile() {
-    const [user, setUser] = useState({})
-    useEffect(() => {
-        const data = localStorage.getItem("user");
-        if (data){
-            setUser(JSON.parse(data))
+    type User = {
+        firstname: string;
+        lastname: string;
+        email: string;
+        password: string;
+        isVerified: boolean;
+        isRemembered: boolean;
+        isLoggedIn: boolean;
+        timeJoined: string;
+        image: string;
+        preferences: {};
+    };
+
+    const [user, setUser] =  useState<User | null>(null)
+    useEffect(async () => {
+        const storedUser = await AsyncStorage.getItem("user");
+        const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+        if (parsedUser) {
+            setUser(parsedUser)
         }
     },[]);
 

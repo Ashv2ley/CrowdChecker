@@ -1,11 +1,31 @@
 import {useRouter} from "expo-router";
 import {Image, TouchableOpacity, View} from "react-native";
-import React from "react";
-import data from "../../data.json"
+import React, {useEffect, useState} from "react";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Header() {
+    type User = {
+        firstname: string;
+        lastname: string;
+        email: string;
+        password: string;
+        isVerified: boolean;
+        isRemembered: boolean;
+        isLoggedIn: boolean;
+        timeJoined: string;
+        image: string;
+        preferences: {};
+    };
     const router = useRouter();
+    const [user, setUser] =  useState<User | null>(null)
+    useEffect(async () => {
+        const storedUser = await AsyncStorage.getItem("user");
+        const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+        if (parsedUser) {
+            setUser(parsedUser)
+        }
+    },[]);
     return (
         <SafeAreaView>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20}}>
@@ -17,11 +37,11 @@ export default function Header() {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => router.push("/(tabs)/profile")}>
-                    {/*<Image*/}
-                    {/*    source={{ uri: data.user.image }}*/}
-                    {/*    style={{ width: 50, height: 50, borderRadius: 100 }}*/}
-                    {/*    resizeMode="contain"*/}
-                    {/*/>*/}
+                    <Image
+                        source={{ uri: user?.image }}
+                        style={{ width: 50, height: 50, borderRadius: 100 }}
+                        resizeMode="contain"
+                    />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
