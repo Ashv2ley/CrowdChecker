@@ -17,11 +17,11 @@ export default function Header() {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => router.push("/(tabs)/profile")}>
-                    <Image
-                        source={{ uri: data.user.image }}
-                        style={{ width: 50, height: 50, borderRadius: 100 }}
-                        resizeMode="contain"
-                    />
+                    {/*<Image*/}
+                    {/*    source={{ uri: data.user.image }}*/}
+                    {/*    style={{ width: 50, height: 50, borderRadius: 100 }}*/}
+                    {/*    resizeMode="contain"*/}
+                    {/*/>*/}
                 </TouchableOpacity>
             </View>
         </SafeAreaView>

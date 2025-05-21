@@ -1,15 +1,17 @@
 {
-  "user": {
-    "firstname": "",
-    "lastname": "",
-    "email": "",
-    "password": "",
-    "isVerified": false,
-    "isRemembered": false,
-    "timeJoined": "",
-    "image": "https://th.bing.com/th/id/OIP.hmLglIuAaL31MXNFuTGBgAHaHa?rs=1&pid=ImgDetMain",
-    "preferences": {}
-  },
+  "users": [
+      {
+        "firstname": "None",
+        "lastname": "None",
+        "email": "None",
+        "password": "None",
+        "isVerified": false,
+        "isRemembered": false,
+        "timeJoined": "",
+        "image": "https://th.bing.com/th/id/OIP.hmLglIuAaL31MXNFuTGBgAHaHa?rs=1&pid=ImgDetMain",
+        "preferences": {}
+      }
+  ],
   "locations": [
     {
       "name": "All Amenities",
