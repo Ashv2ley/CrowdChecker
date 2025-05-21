@@ -5,6 +5,12 @@ import Splash from "@/app/splash";
 
 export default function RootLayout() {
     const [loading, setLoading] = useState<boolean>(true);
+    useEffect(() => {
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000); // show splash screen for 2s
+    });
+
 
   return (
             loading ? (<Splash/>) : (
