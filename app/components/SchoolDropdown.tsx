@@ -1,5 +1,5 @@
-import Reactr from 'react';
-import { View, Text } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 const SchoolDropdown = ({ selectedValue, onValueChange }) => {
@@ -17,7 +17,6 @@ const SchoolDropdown = ({ selectedValue, onValueChange }) => {
 
     return (
         <View>
-            <Text>Choose an option:</Text>
             <Picker
                 selectedValue={selectedValue}
                 onValueChange={onValueChange}
@@ -26,7 +25,6 @@ const SchoolDropdown = ({ selectedValue, onValueChange }) => {
                     <Picker.Item key={school.id} label={school.name} value={school.id}/>
                 ))}
             </Picker>
-            <Text>Selected: {selectedValue}</Text>
         </View>
     );
 };
