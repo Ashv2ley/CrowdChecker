@@ -32,18 +32,18 @@ export default function Profile() {
 
     return (
         <SafeAreaView>
-            <View>
+            <View className={"flex-col items-center p-6"}>
                 <Image
                     source={{ uri: user?.image }}
-                    style={{ width: 200, height: 200, borderRadius: 100 }}
+                    style={{ width: 250, height: 250, borderRadius: 250, borderColor: "#7ABD7E", borderWidth: 5, shadowColor: "#7ABD7E", shadowRadius: 250 }}
                     resizeMode="contain"
                 />
-                <View>
-                    <Text>{user?.firstname}</Text>
-                    <Text>{user?.lastname}</Text>
+                <View className={"flex-row w-full p-4 border-2 border-black rounded-2xl"} style={{marginTop: 30, gap: 10}}>
+                    <Text className={"text-2xl font-semibold"}>{user?.firstname}</Text>
+                    <Text className={"text-2xl font-semibold"}>{user?.lastname}</Text>
                 </View>
-                <View>
-                    <Text>{user?.email}</Text>
+                <View className={"flex-row w-full p-4 border-2 border-black rounded-2xl"} style={{marginVertical: 30, gap: 10}}>
+                    <Text className={"text-2xl font-semibold"}>{user?.email}</Text>
                 </View>
                 <TouchableOpacity>
                     <Text>Edit Crowd Level Preferences</Text>

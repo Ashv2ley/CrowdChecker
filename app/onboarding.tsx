@@ -31,7 +31,7 @@ export default function Onboarding() {
     const [errorMessage, setErrorMessage] = useState("");
 
     const handleConfirmPassword = () => {
-        if (password !== confirmPassword) {
+        if (password.toLowerCase() !== confirmPassword.toLowerCase()) {
             setErrorMessage("Passwords don't match!");
             return false;
         }
@@ -39,7 +39,7 @@ export default function Onboarding() {
     }
     const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
-        const existing = data.users.find((user:User) => user.email === email);
+        const existing = data.users.find((user:User) => user.email.toLowerCase() === email.toLowerCase());
         if (!existing && handleConfirmPassword()){
             const user = {
                 "firstname": firstname,
@@ -63,7 +63,7 @@ export default function Onboarding() {
     }
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const user = data.users.find((user:User) => user.email === email);
+        const user = data.users.find((user:User) => user.email.toLowerCase() === email.toLowerCase());
         if (user) {
             user.isLoggedIn = true;
             await AsyncStorage.setItem("user", JSON.stringify(user));
@@ -174,8 +174,16 @@ export default function Onboarding() {
                             {/* Apple Login */}
 
                             {/* Google Login */}
+                            <View className={"p-2"}>
+                                {errorMessage.length > 0 && (
+                                    <Text className={"text-dark-red"}>
+                                        {errorMessage}
+                                    </Text>
+                                )}
+                            </View>
 
                         </View>
+
                     )}
                 </View>
             </View>
