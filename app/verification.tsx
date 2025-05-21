@@ -8,7 +8,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 export default function Verification() {
     const router = useRouter();
     return (
-        <SafeAreaView className="m-6 gap-12 p-6 items-center">
+        <SafeAreaView className="m-6 gap-12 items-center">
             <View className="relative w-full h-12 items-center justify-center">
                 {/* Back Arrow */}
                 <View className="absolute left-0">
