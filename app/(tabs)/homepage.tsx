@@ -1,7 +1,12 @@
 import { SafeAreaView, ScrollView, View } from "react-native";
 import HomePageSection from "../components/HomePageSection";
+import SchoolDropdown from "@/app/components/SchoolDropdown";
+import LocationDropdown from "@/app/components/LocationDropdown";
+import {useState} from "react";
 
 export default function HomePage() {
+    const [selectedSchool, setSelectedSchool] = useState(3);
+    const [selectedLocation, setSelectedLocation] = useState(1);
     // amenity arrays
     const gyms = [
         { name: 'Anteater Recreation Center', icon: 'High' },
@@ -48,6 +53,8 @@ export default function HomePage() {
     return (
         <SafeAreaView className="flex-1">
             <View className="flex-1 bg-cream pt-10">
+                <SchoolDropdown selectedValue={selectedSchool} onValueChange={(value:number) => setSelectedSchool(value)}/>
+                <LocationDropdown selectedValue={selectedLocation} onValueChange={(value:number) => setSelectedLocation(value)}/>
                 <ScrollView>
                     <HomePageSection title="Gyms" cards={gyms} />
                     <HomePageSection title="Dining Halls" cards={diningHalls} />
