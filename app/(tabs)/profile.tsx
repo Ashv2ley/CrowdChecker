@@ -17,13 +17,18 @@ export default function Profile() {
     };
 
     const [user, setUser] =  useState<User | null>(null)
-    useEffect(async () => {
-        const storedUser = await AsyncStorage.getItem("user");
-        const parsedUser = storedUser ? JSON.parse(storedUser) : null;
-        if (parsedUser) {
-            setUser(parsedUser)
-        }
-    },[]);
+    useEffect(() => {
+        const loadUser = async () => {
+            const storedUser = await AsyncStorage.getItem("user");
+            const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+            if (parsedUser) {
+                setUser(parsedUser);
+            }
+        };
+
+        loadUser();
+    }, []);
+
 
     return (
         <SafeAreaView>
@@ -40,7 +45,9 @@ export default function Profile() {
                 <View>
                     <Text>{user?.email}</Text>
                 </View>
-                <TouchableOpacity>Edit Crowd Level Preferences</TouchableOpacity>
+                <TouchableOpacity>
+                    <Text>Edit Crowd Level Preferences</Text>
+                </TouchableOpacity>
 
             </View>
         </SafeAreaView>

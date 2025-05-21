@@ -7,6 +7,9 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 export default function Verification() {
     const router = useRouter();
+    const handleVerification = () => {
+        router.push("/(tabs)/homepage");
+    }
     return (
         <SafeAreaView className="m-6 gap-12 items-center">
             <View className="relative w-full h-12 items-center justify-center">
@@ -34,7 +37,7 @@ export default function Verification() {
             </View>
             {/* Verification code input*/}
 
-            <CustomButton bgColor={"bg-dark-green"} pageNav={"(tabs)/homepage"} text={"Confirm"}/>
+            <CustomButton bgColor={"bg-dark-green"} onPress={handleVerification} text={"Confirm"}/>
             <View className="flex-row gap-1">
                 <Text>Didn’t receive the code?</Text>
                 <Text className={"font-bold text-dark-green"}>Resend</Text>

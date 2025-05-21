@@ -19,13 +19,18 @@ export default function Header() {
     };
     const router = useRouter();
     const [user, setUser] =  useState<User | null>(null)
-    useEffect(async () => {
-        const storedUser = await AsyncStorage.getItem("user");
-        const parsedUser = storedUser ? JSON.parse(storedUser) : null;
-        if (parsedUser) {
-            setUser(parsedUser)
-        }
-    },[]);
+    useEffect(() => {
+        const loadUser = async () => {
+            const storedUser = await AsyncStorage.getItem("user");
+            const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+            if (parsedUser) {
+                setUser(parsedUser);
+            }
+        };
+
+        loadUser();
+    }, []);
+
     return (
         <SafeAreaView>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20}}>
