@@ -712,6 +712,5 @@
       ]
     }
   ],
-  "densities": ["low", "moderate", "high"],
-  "favorites": []
+  "densities": ["low", "moderate", "high"]
 }
