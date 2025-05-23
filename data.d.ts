@@ -12,6 +12,26 @@ export interface User {
     favorites: number[],
 }
 
+export interface Location {
+    id: number;
+    name: string;
+    type: number;
+    distance: number;
+    hours: {
+        open: string;
+        close: string;
+    };
+    currentDensity: string;
+    reports: {
+        density: string;
+        timeReported: string;
+    }[];
+    comments: {
+        text: string;
+        timeSubmitted: string;
+    }[]
+}
+
 export interface Data {
     users: User[];
 }

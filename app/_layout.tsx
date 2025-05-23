@@ -24,11 +24,11 @@ export default function RootLayout() {
                     options={{headerShown: false}}
                 />
                 <Stack.Screen
-                    name="(tabs)"
+                    name="locations/[id]"
                     options={{headerShown: false}}
                 />
                 <Stack.Screen
-                    name="locations/[id]"
+                    name="(tabs)"
                     options={{headerShown: false}}
                 />
             </Stack>

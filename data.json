@@ -50,13 +50,10 @@
       ],
       "comments": [
         {
-          "text": "Pretty empty early in the morning."
+          "text": "Pretty empty early in the morning.", "timeSubmitted": "2025-05-20T12:15:00"
         },
         {
-          "timeSubmitted": "2025-05-20T12:15:00"
-        },
-        {
-          "text": "Too crowded, couldn't find a spot.\", 'timeSubmitted': '2025-05-20T16:00:00"
+          "text": "Too crowded, couldn't find a spot.", "timeSubmitted": "2025-05-20T16:00:00"
         }
       ]
     },
@@ -69,7 +66,7 @@
         "open": "2025-05-20T06:00:00",
         "close": "2025-05-20T23:00:00"
       },
-      "currentDensity": "very high",
+      "currentDensity": "high",
       "reports": [
         {
           "density": "moderate",
@@ -138,7 +135,7 @@
           "timeReported": "2025-05-20T10:00:00"
         },
         {
-          "density": "very high",
+          "density": "high",
           "timeReported": "2025-05-20T08:30:00"
         }
       ],
@@ -262,7 +259,7 @@
           "timeReported": "2025-05-20T11:30:00"
         },
         {
-          "density": "very high",
+          "density": "high",
           "timeReported": "2025-05-20T08:30:00"
         }
       ],
@@ -348,10 +345,10 @@
         "open": "2025-05-20T06:00:00",
         "close": "2025-05-20T23:00:00"
       },
-      "currentDensity": "very high",
+      "currentDensity": "high",
       "reports": [
         {
-          "density": "very high",
+          "density": "high",
           "timeReported": "2025-05-20T20:30:00"
         },
         {
@@ -448,7 +445,7 @@
           "timeReported": "2025-05-20T13:30:00"
         },
         {
-          "density": "very high",
+          "density": "high",
           "timeReported": "2025-05-20T07:00:00"
         }
       ],
@@ -479,7 +476,7 @@
           "timeReported": "2025-05-20T20:45:00"
         },
         {
-          "density": "very high",
+          "density": "high",
           "timeReported": "2025-05-20T21:30:00"
         }
       ],
@@ -534,7 +531,7 @@
         "open": "2025-05-20T06:00:00",
         "close": "2025-05-20T23:00:00"
       },
-      "currentDensity": "very high",
+      "currentDensity": "high",
       "reports": [
         {
           "density": "high",
@@ -565,7 +562,7 @@
         "open": "2025-05-20T06:00:00",
         "close": "2025-05-20T23:00:00"
       },
-      "currentDensity": "very high",
+      "currentDensity": "high",
       "reports": [
         {
           "density": "high",
@@ -599,7 +596,7 @@
       "currentDensity": "high",
       "reports": [
         {
-          "density": "very high",
+          "density": "high",
           "timeReported": "2025-05-20T20:15:00"
         },
         {
@@ -627,14 +624,14 @@
         "open": "2025-05-20T06:00:00",
         "close": "2025-05-20T23:00:00"
       },
-      "currentDensity": "very high",
+      "currentDensity": "high",
       "reports": [
         {
           "density": "moderate",
           "timeReported": "2025-05-20T09:00:00"
         },
         {
-          "density": "very high",
+          "density": "high",
           "timeReported": "2025-05-20T11:00:00"
         }
       ],
@@ -665,7 +662,7 @@
           "timeReported": "2025-05-20T16:30:00"
         },
         {
-          "density": "very high",
+          "density": "high",
           "timeReported": "2025-05-20T12:30:00"
         }
       ],
@@ -692,7 +689,7 @@
       "currentDensity": "low",
       "reports": [
         {
-          "density": "very high",
+          "density": "high",
           "timeReported": "2025-05-20T19:00:00"
         },
         {

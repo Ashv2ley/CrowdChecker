@@ -3,52 +3,18 @@ import HomePageSection from "../components/HomePageSection";
 import SchoolDropdown from "@/app/components/SchoolDropdown";
 import LocationDropdown from "@/app/components/LocationDropdown";
 import {useState} from "react";
+import data from "../../data.json"
 
 export default function HomePage() {
     const [selectedSchool, setSelectedSchool] = useState(3);
     const [selectedLocation, setSelectedLocation] = useState(1);
     // amenity arrays
-    const gyms = [
-        { name: 'Anteater Recreation Center', icon: 'High' },
-        { name: 'Mesa Court Recreation Center', icon: 'Low' },
-    ];
-
-    const diningHalls = [
-        { name: 'Brandywine Commons', icon: 'Moderate' },
-        { name: 'The Anteatery', icon: 'High' },
-    ];
-
-    const libraries = [
-        { name: 'Science Library', icon: 'High' },
-        { name: 'Langson Library', icon: 'High' },
-    ];
-
-    const buses = [
-        { name: 'A Line', icon: 'High' },
-        { name: 'E Line', icon: 'High' },
-        { name: 'H Line', icon: 'High' },
-        { name: 'M Line', icon: 'High' },
-        { name: 'N Line', icon: 'High' },
-    ];
-
-    const parkingStructures = [
-        { name: 'Anteater Parking Structure', icon: 'High' },
-        { name: 'Mesa Parking Structure', icon: 'High' },
-        { name: 'Social Sciences Parking Structure', icon: 'High' },
-        { name: 'Student Center Parking Structure', icon: 'High' },
-        { name: 'Health Sciences parking Structure', icon: 'High' },
-        { name: 'ARC Parking Structure', icon: 'High' },
-    ];
-
-    const parkingLots = [
-        { name: 'Lot ARC', icon: 'High' },
-        { name: 'Lot 5', icon: 'High' },
-        { name: 'Lot 14', icon: 'High' },
-        { name: 'Lot 14A', icon: 'High' },
-        { name: 'Lot 16H', icon: 'High' },
-        { name: 'Lot 70', icon: 'High' },
-        { name: 'Lot 90', icon: 'High' },
-    ];
+    const gyms = data.locationData.filter(location => location.type === 1);
+    const diningHalls = data.locationData.filter(location => location.type === 2);
+    const libraries = data.locationData.filter(location => location.type === 3);
+    const buses = data.locationData.filter(location => location.type === 4);
+    const parkingStructures = data.locationData.filter(location => location.type === 5);
+    const parkingLots = data.locationData.filter(location => location.type === 6);
 
     return (
         <SafeAreaView className="flex-1">
