@@ -9,7 +9,7 @@ export interface User {
     timeJoined: string;
     image: string;
     preferences: {};
-    favorites: [],
+    favorites: number[],
 }
 
 export interface Data {

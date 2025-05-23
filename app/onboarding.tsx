@@ -18,7 +18,7 @@ export default function Onboarding() {
         timeJoined: string;
         image: string;
         preferences: {};
-        favorites: [],
+        favorites: number[],
     };
     const data: Data = rawData;
     const router = useRouter();
@@ -50,7 +50,8 @@ export default function Onboarding() {
                 "isLoggedIn": true,
                 "timeJoined": Date.now().toString(),
                 "image": "https://th.bing.com/th/id/OIP.hmLglIuAaL31MXNFuTGBgAHaHa?rs=1&pid=ImgDetMain",
-                "preferences": {}
+                "preferences": {},
+                "favorites": []
             }
             data.users.push(user);
             await AsyncStorage.setItem("user", JSON.stringify(user));
