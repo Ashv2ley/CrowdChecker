@@ -4,12 +4,12 @@ export interface User {
     lastname: string;
     email: string;
     password: string;
-    isVerified: boolean;
     isRemembered: boolean;
     isLoggedIn: boolean;
     timeJoined: string;
     image: string;
-    preferences: Record<string, unknown>;
+    preferences: {};
+    favorites: [],
 }
 
 export interface Data {

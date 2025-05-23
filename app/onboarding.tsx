@@ -13,12 +13,12 @@ export default function Onboarding() {
         lastname: string;
         email: string;
         password: string;
-        isVerified: boolean;
         isRemembered: boolean;
         isLoggedIn: boolean;
         timeJoined: string;
         image: string;
         preferences: {};
+        favorites: [],
     };
     const data: Data = rawData;
     const router = useRouter();
@@ -46,7 +46,6 @@ export default function Onboarding() {
                 "lastname": lastname,
                 "email": email,
                 "password": confirmPassword,
-                "isVerified": false,
                 "isRemembered": false,
                 "isLoggedIn": true,
                 "timeJoined": Date.now().toString(),
@@ -55,7 +54,7 @@ export default function Onboarding() {
             }
             data.users.push(user);
             await AsyncStorage.setItem("user", JSON.stringify(user));
-            router.push("/verification")
+            router.push("/(tabs)/homepage")
         } else{
             console.log("Email already exists!");
             return;
@@ -67,7 +66,7 @@ export default function Onboarding() {
         if (user) {
             user.isLoggedIn = true;
             await AsyncStorage.setItem("user", JSON.stringify(user));
-            router.push("/verification")
+            router.push("/(tabs)/homepage")
         } else {
             setErrorMessage("Account does not exists!");
             return;
