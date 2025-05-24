@@ -28,7 +28,7 @@ export default function HomePageSection({ title, cards }: HomePageSectionProps) 
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         <View className="flex-row gap-4">
           {cards.map((card: Location, index: React.Key) => (
-            <HomePageCard key={card.id} name={card.name} id={card.id} icon={iconMap[card.currentDensity]} open={card.hours.open} close={card.hours.close} distace={card.distance}/>
+            <HomePageCard key={card.id} name={card.name} id={card.id} distance={card.distance} icon={iconMap[card.currentDensity]} open={card.hours.open} close={card.hours.close} distace={card.distance}/>
           ))}
         </View>
       </ScrollView>
