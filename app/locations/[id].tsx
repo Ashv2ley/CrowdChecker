@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context"
-import { CartesianChart, Bar, VictoryBar } from "victory-native";
+import { CartesianChart, Bar } from "victory-native";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import data from "../../data.json"
 import HighCrowd from '../../assets/crowd-level/HighCrowd';

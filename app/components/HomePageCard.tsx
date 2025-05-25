@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type HomePageCardProps = {
   name: string;
@@ -15,6 +16,38 @@ export default function HomePageCard({name, id, icon, open, close, distance}) {
     const openTime = new Date(open).getHours();
     const closeTime = new Date(close).getHours();
     const [favorite, setFavorite] = React.useState(false);
+    const [user, setUser] =  useState<User | null>(null)
+    type User = {
+        firstname: string;
+        lastname: string;
+        email: string;
+        password: string;
+        isRemembered: boolean;
+        isLoggedIn: boolean;
+        timeJoined: string;
+        image: string;
+        preferences: {};
+        favorites: number[],
+    };
+
+    const handleFavorite = async () => {
+        const storedUser = await AsyncStorage.getItem("user");
+        const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+        if (!parsedUser) return;
+
+        const isFavorite = parsedUser.favorites.includes(id);
+
+        const updatedFavorites = isFavorite
+            ? parsedUser.favorites.filter(favId => favId !== id)
+            : [...parsedUser.favorites, id];
+
+        const updatedUser = { ...parsedUser, favorites: updatedFavorites };
+        setUser(updatedUser);
+        await AsyncStorage.setItem("user", JSON.stringify(updatedUser));
+        setFavorite(!isFavorite);
+    };
+
+    console.log("card", user?.favorites);
 
     return (
     <TouchableOpacity className='border-2 rounded-2xl justify-between text-brown p-2 w-40 h-32 relative' onPress={() => router.push(`/locations/${id}`)}>
@@ -32,8 +65,8 @@ export default function HomePageCard({name, id, icon, open, close, distance}) {
             <Text className='text-xs z-1 text-gray-600 text-brown'>{distance} mi • Open {openTime}pm • Closes {closeTime-11}am</Text>
             {
                 favorite ?
-                    (<FontAwesome name="heart" size={24} color="green" className='absolute z-0 bottom-2 right-2 items-center w-5 h-12' onPress={()=> setFavorite(!favorite)}/>) :
-                    (<FontAwesome name="heart-o" size={24} color="black" className='absolute z-0 bottom-2 right-2 items-center w-5 h-12' onPress={()=> setFavorite(!favorite)}/>)
+                    (<FontAwesome name="heart" size={22} color="green" className='absolute z-0 bottom-2 right-2 items-center w-5 h-12' onPress={()=> handleFavorite()}/>) :
+                    (<FontAwesome name="heart-o" size={22} color='#7ABD7E' className='absolute z-0 bottom-2 right-2 items-center w-5 h-12' onPress={()=> handleFavorite()}/>)
             }
         </View>
     </TouchableOpacity>
