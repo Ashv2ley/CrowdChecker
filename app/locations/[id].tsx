@@ -1,7 +1,7 @@
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import {View, Text, TouchableOpacity, ScrollView, Dimensions} from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context"
-import { CartesianChart, Bar } from "victory-native";
+import { BarChart } from 'react-native-chart-kit';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import data from "../../data.json"
 import HighCrowd from '../../assets/crowd-level/HighCrowd';
@@ -38,25 +38,40 @@ export default function LocationDetails() {
     const locationId = parseInt(id as string, 10);
     const locationData = data.locationData.find((location:Location) => location.id === locationId);
     const IconComponent = iconMap[locationData.currentDensity];
-    const densityData = Object.entries(
-        data.locationData.reduce(
-            (acc: { low: number; moderate: number; high: number }, location: Location) => {
-                location.reports.forEach((report) => {
-                    const density = report.density.toLowerCase();
-                    if (density === "low" || density === "moderate" || density === "high") {
-                        acc[density]++;
-                    }
-                });
-                return acc;
+    const LowIcon = iconMap["low"];
+    const ModerateIcon = iconMap["moderate"];
+    const HighIcon = iconMap["high"];
+    const densityCounts = data.locationData.reduce(
+        (acc: { low: number; moderate: number; high: number }, location: Location) => {
+            location.reports.forEach((report) => {
+                const density = report.density.toLowerCase();
+                if (density === "low" || density === "moderate" || density === "high") {
+                    acc[density]++;
+                }
+            });
+            return acc;
+        },
+        { low: 0, moderate: 0, high: 0 }
+    );
+
+    const DATA = {
+        labels: [],
+        datasets: [
+            {
+                data: [densityCounts.low, densityCounts.moderate, densityCounts.high],
+                colors: [
+                    () => '#B6D7A8',
+                    () => '#FAD5A0',
+                    () => '#EA9999',
+                ],
             },
-            { low: 0, moderate: 0, high: 0 }
-        )
-    ).map(([key, value]) => ({ x: key, y: value }));
+        ],
+    };
 
     return (
         <SafeAreaView>
-            <View className="p-6 gap-4">
-                <View className={"flex-row"} style={{ flexDirection:"row", alignItems:"center"}}>
+            <View className="p-6 gap-8">
+                <View className={"flex-row"} style={{ flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
                     <MaterialIcons name="arrow-back-ios-new" size={24} color="black" onPress={() => router.back()} className={"bg-green rounded-full p-2"}/>
                     <Text style={{fontSize:20, fontWeight:"600"}}>{locationData?.name}</Text>
                     <IconComponent/>
@@ -91,14 +106,39 @@ export default function LocationDetails() {
                 <View>
                     <Text style={{fontSize:20, fontWeight:"500", outlineStyle:"solid", color: "#7ABD7E"}}>Predicted Crowd</Text>
                 </View>
-                <CartesianChart data={densityData} xKey="x" yKeys={["y"]}>
-                    {({ points, chartBounds }) => (
-                        <Bar
-                            points={points.y}
-                            chartBounds={chartBounds}
-                        />
-                    )}
-                </CartesianChart>
+                <BarChart
+                    data={DATA}
+                    width={Dimensions.get('window').width - 40}
+                    height={200}
+                    fromZero
+                    withInnerLines={false}
+                    withHorizontalLabels={false}
+                    showValuesOnTopOfBars={false}
+                    withCustomBarColorFromData={true}
+                    flatColor={true}
+                    chartConfig={{
+                        barPercentage: 2,
+                        backgroundGradientFrom: "#F3F3F3",
+                        backgroundGradientTo: "#F3F3F3",
+                        fillShadowGradientOpacity: 1,
+                        decimalPlaces: 0,
+                        color: (opacity = 1) => `rgba(240, 240, 240, ${opacity})`,
+                    }}
+                    style={{
+                        alignSelf: "center",
+                    }}
+                />
+                <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+                    <View style={{ alignItems: "center" }}>
+                        <LowIcon/>
+                    </View>
+                    <View style={{ alignItems: "center" }}>
+                        <ModerateIcon/>
+                    </View>
+                    <View style={{ alignItems: "center" }}>
+                        <HighIcon/>
+                    </View>
+                </View>
 
                 <View>
                     <View>

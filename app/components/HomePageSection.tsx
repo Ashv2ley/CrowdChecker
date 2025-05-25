@@ -22,7 +22,7 @@ export default function HomePageSection({ title, cards }: HomePageSectionProps) 
     return (
     <View className="mb-4 ml-4 mr-4">
       <View className="flex-row items-baseline gap-2">
-        <Text className="font-semibold text-3xl text-brown">{title}</Text>
+        <Text className="font-semibold text-3xl text-brown mb-2">{title}</Text>
         <Text className="font-medium text-sm text-brown">{cards.length} open</Text>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
