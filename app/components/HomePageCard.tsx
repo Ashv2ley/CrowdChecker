@@ -65,8 +65,8 @@ export default function HomePageCard({name, id, icon, open, close, distance}) {
             <Text className='text-xs z-1 text-gray-600 text-brown'>{distance} mi • Open {openTime}pm • Closes {closeTime-11}am</Text>
             {
                 favorite ?
-                    (<FontAwesome name="heart" size={22} color="green" className='absolute z-0 bottom-2 right-2 items-center w-5 h-12' onPress={()=> handleFavorite()}/>) :
-                    (<FontAwesome name="heart-o" size={22} color='#7ABD7E' className='absolute z-0 bottom-2 right-2 items-center w-5 h-12' onPress={()=> handleFavorite()}/>)
+                    (<FontAwesome name="heart" size={22} color="green" className='absolute z-0 bottom-2 right-2 items-center w-6 h-16' onPress={()=> handleFavorite()}/>) :
+                    (<FontAwesome name="heart-o" size={22} color='#7ABD7E' className='absolute z-0 bottom-2 right-2 items-center w-6 h-16' onPress={()=> handleFavorite()}/>)
             }
         </View>
     </TouchableOpacity>

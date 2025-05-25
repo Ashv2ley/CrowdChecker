@@ -1,7 +1,7 @@
 import {View, Text, TouchableOpacity, ScrollView, Dimensions} from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context"
-import { BarChart } from 'react-native-chart-kit';
+import { BarChart, LineChart } from 'react-native-chart-kit';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import data from "../../data.json"
 import HighCrowd from '../../assets/crowd-level/HighCrowd';
@@ -69,7 +69,7 @@ export default function LocationDetails() {
     };
 
     return (
-        <SafeAreaView>
+        <ScrollView>
             <View className="p-6 gap-8">
                 <View className={"flex-row"} style={{ flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
                     <MaterialIcons name="arrow-back-ios-new" size={24} color="black" onPress={() => router.back()} className={"bg-green rounded-full p-2"}/>
@@ -82,6 +82,38 @@ export default function LocationDetails() {
                 <View className="gap-4">
                     <Text style={{fontSize:20, fontWeight:"500", outlineStyle:"solid", color: "#7ABD7E"}}>Current Reports</Text>
                     <Text>Student opinions on the crowd at 5–6 PM today</Text>
+                    <BarChart
+                        data={DATA}
+                        width={Dimensions.get('window').width - 40}
+                        height={220}
+                        fromZero
+                        chartConfig={{
+                            backgroundGradientFrom: '#F3F3F3',
+                            backgroundGradientTo: '#F3F3F3',
+                            decimalPlaces: 0,
+                            color: (opacity = 1) => `rgba(34, 197, 94, ${opacity})`,
+                            labelColor: () => '#000',
+                        }}
+
+                        style={{
+                            marginVertical: 8,
+                            borderRadius: 16,
+                        }}
+                    />
+                    <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+                        <View style={{ alignItems: "center" }}>
+                            <LowIcon/>
+                            <Text style={{ color: "#7ABD7E", fontWeight: "600" }}>low</Text>
+                        </View>
+                        <View style={{ alignItems: "center" }}>
+                            <ModerateIcon/>
+                            <Text style={{ color: "#FFC571", fontWeight: "600" }}>moderate</Text>
+                        </View>
+                        <View style={{ alignItems: "center" }}>
+                            <HighIcon/>
+                            <Text style={{ color: "#E06666", fontWeight: "600" }}>high</Text>
+                        </View>
+                    </View>
                     <ScrollView
                         horizontal
                         showsHorizontalScrollIndicator={false}
@@ -104,39 +136,40 @@ export default function LocationDetails() {
                     </ScrollView>
                 </View>
                 <View>
-                    <Text style={{fontSize:20, fontWeight:"500", outlineStyle:"solid", color: "#7ABD7E"}}>Predicted Crowd</Text>
-                </View>
-                <BarChart
-                    data={DATA}
-                    width={Dimensions.get('window').width - 40}
-                    height={200}
-                    fromZero
-                    withInnerLines={false}
-                    withHorizontalLabels={false}
-                    showValuesOnTopOfBars={false}
-                    withCustomBarColorFromData={true}
-                    flatColor={true}
-                    chartConfig={{
-                        barPercentage: 2,
-                        backgroundGradientFrom: "#F3F3F3",
-                        backgroundGradientTo: "#F3F3F3",
-                        fillShadowGradientOpacity: 1,
-                        decimalPlaces: 0,
-                        color: (opacity = 1) => `rgba(240, 240, 240, ${opacity})`,
-                    }}
-                    style={{
-                        alignSelf: "center",
-                    }}
-                />
-                <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-                    <View style={{ alignItems: "center" }}>
-                        <LowIcon/>
-                    </View>
-                    <View style={{ alignItems: "center" }}>
-                        <ModerateIcon/>
-                    </View>
-                    <View style={{ alignItems: "center" }}>
-                        <HighIcon/>
+                    <Text style={{ fontSize: 20, fontWeight: '500', color: '#7ABD7E' }}>
+                        Predicted Crowd
+                    </Text>
+                    <LineChart
+                        data={DATA}
+                        width={Dimensions.get('window').width}
+                        height={220}
+                        yAxisSuffix=""
+                        fromZero
+                        chartConfig={{
+                            backgroundGradientFrom: '#F3F3F3',
+                            backgroundGradientTo: '#F3F3F3',
+                            fillShadowGradientOpacity: 1,
+                            decimalPlaces: 0,
+                            color: (opacity = 1) => `rgba(34, 197, 94, ${opacity})`,
+                            labelColor: () => '#000',
+                        }}
+                        style={{
+                            borderRadius: 16,
+                        }}
+                    />
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 12 }}>
+                        <View style={{ alignItems: 'center' }}>
+                            <LowIcon />
+                            <Text style={{ fontWeight: '500', marginTop: 4 }}>Low</Text>
+                        </View>
+                        <View style={{ alignItems: 'center' }}>
+                            <ModerateIcon />
+                            <Text style={{ fontWeight: '500', marginTop: 4 }}>Moderate</Text>
+                        </View>
+                        <View style={{ alignItems: 'center' }}>
+                            <HighIcon />
+                            <Text style={{ fontWeight: '500', marginTop: 4 }}>High</Text>
+                        </View>
                     </View>
                 </View>
 
@@ -149,6 +182,6 @@ export default function LocationDetails() {
                     </View>
                 </View>
             </View>
-        </SafeAreaView>
+        </ScrollView>
     );
 }
