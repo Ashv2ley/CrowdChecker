@@ -19,13 +19,15 @@
       }
     },
     "web": {
+      "favicon": "./assets/images/favicon.png",
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png",
+      "basePath": "/CrowdChecker",
+      "publicPath": "/CrowdChecker/",
       "build": {
         "publicPath": "/CrowdChecker/"
       }
-    },
+    },    
     "plugins": [
       "expo-router",
       "expo-apple-authentication",
@@ -44,7 +46,8 @@
     ],
 
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "baseUrl": "/CrowdChecker"
     }
   }
 }
