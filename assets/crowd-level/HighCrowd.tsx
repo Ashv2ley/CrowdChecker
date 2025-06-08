@@ -1,5 +1,5 @@
 import React from 'react';
-import { Svg, Circle, Path } from 'react-native-svg';
+import { Circle, Path, Svg } from 'react-native-svg';
 
 const HighCrowd = () => (
     <Svg width="40" height="40" viewBox="0 0 131 131" fill="none" xmlns="http://www.w3.org/2000/svg">

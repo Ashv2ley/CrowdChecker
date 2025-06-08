@@ -1,9 +1,10 @@
-import { SafeAreaView, ScrollView, View } from "react-native";
-import HomePageSection from "../components/HomePageSection";
-import SchoolDropdown from "@/app/components/SchoolDropdown";
 import LocationDropdown from "@/app/components/LocationDropdown";
-import {useState} from "react";
-import data from "../../data.json"
+import SchoolDropdown from "@/app/components/SchoolDropdown";
+import { useState } from "react";
+import { SafeAreaView, ScrollView, View } from "react-native";
+import data from "../../data.json";
+import HomePageSection from "../components/HomePageSection";
+
 
 export default function HomePage() {
     const [selectedSchool, setSelectedSchool] = useState(3);
@@ -19,7 +20,7 @@ export default function HomePage() {
     return (
         <SafeAreaView className="flex-1">
             <ScrollView>
-                <View className="flex-row px-4 py-2 gap-x-2">
+                <View className="flex-row bg-cream px-4 py-2 gap-x-2">
                     <View className="flex-1">
                         <SchoolDropdown
                             selectedValue={selectedSchool}

@@ -1,14 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 type HomePageCardProps = {
   name: string;
   icon: React.FC;
 };
-
 
 export default function HomePageCard({name, id, icon, open, close, distance}) {
     const router = useRouter();
