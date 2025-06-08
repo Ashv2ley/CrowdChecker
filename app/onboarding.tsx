@@ -1,11 +1,11 @@
-import {View, Text, SafeAreaView, TextInput, Platform} from "react-native";
-import CustomSwitch from "@/app/components/CustomSwitch"
-import CustomButton from "@/app/components/CustomButton"
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import rawData from "../data.json"
-import {useState} from "react";
+import CustomButton from "@/app/components/CustomButton";
+import CustomSwitch from "@/app/components/CustomSwitch";
 import { Data } from '@/data';
-import { useRouter } from 'expo-router'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
+import { useState } from "react";
+import { Platform, SafeAreaView, Text, TextInput, View } from "react-native";
+import rawData from "../data.json";
 
 export default function Onboarding() {
     type User = {
@@ -114,13 +114,21 @@ export default function Onboarding() {
                             {/* Password */}
                             <View>
                                 <Text className="mb-1 font-medium">Password</Text>
-                                <TextInput className="border-2 border-gray rounded-full p-4 w-full" onChangeText={(text)=> setPassword(text)}/>
+                                <TextInput
+                                    className="border-2 border-gray rounded-full p-4 w-full" 
+                                    onChangeText={(text)=> setPassword(text)}
+                                    secureTextEntry
+                                />
                             </View>
 
                             {/* Confirm Password */}
                             <View>
                                 <Text className="mb-1 font-medium">Confirm Password</Text>
-                                <TextInput className="border-2 border-gray rounded-full p-4 w-full" onChangeText={(text)=> setConfirmPassword(text)}/>
+                                <TextInput
+                                    className="border-2 border-gray rounded-full p-4 w-full" 
+                                    onChangeText={(text)=> setConfirmPassword(text)}
+                                    secureTextEntry
+                                />
                             </View>
                             {/* Sign Up Button */}
                             <CustomButton text={"Sign Up"} bgColor={"bg-dark-red"} onPress={handleSignUp}/>
