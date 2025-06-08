@@ -153,7 +153,11 @@ export default function Onboarding() {
                             {/* Password */}
                             <View>
                                 <Text className="mb-1 font-medium">Password</Text>
-                                <TextInput className="border-2 border-gray rounded-full p-4 w-full" onChangeText={(text)=> setPassword(text)}/>
+                                <TextInput 
+                                    className="border-2 border-gray rounded-full p-4 w-full" 
+                                    onChangeText={(text)=> setPassword(text)}
+                                    secureTextEntry
+                                />
                             </View>
 
                             <View>
