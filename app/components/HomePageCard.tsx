@@ -46,28 +46,35 @@ export default function HomePageCard({name, id, icon, open, close, distance}) {
         setFavorite(!isFavorite);
     };
 
-    console.log("card", user?.favorites);
-
     return (
-    <TouchableOpacity className='border-2 rounded-2xl justify-between text-brown p-2 w-40 h-32 relative' onPress={() => router.push(`/locations/${id}`)}>
+    <TouchableOpacity className='border-2 rounded-2xl justify-between text-brown p-2 w-56 h-32 relative' onPress={() => router.push(`/locations/${id}`)}>
 
       {/* location */}
-      <Text className='font-bold text-brown w-24'>{name}</Text>
+      <Text className='font-semibold text-brown w-32 text-lg'>{name}</Text>
 
       {/* crowd level */}
-      <View className='absolute z-0 top-2 right-2 flex justify-center items-center w-11 h-12'>
-        <IconComponent/>
+      <View className='absolute z-0 top-2 right-2 flex justify-center items-center w-16 h-16'>
+        <IconComponent size={60} />
       </View>
 
       {/* details */}
-        <View className={"flex-row"}>
-            <Text className='text-xs z-1 text-gray-600 text-brown'>{distance} mi • Open {openTime}pm • Closes {closeTime-11}am</Text>
-            {
-                favorite ?
-                    (<FontAwesome name="heart" size={22} color="green" className='absolute z-0 bottom-2 right-2 items-center w-6 h-16' onPress={()=> handleFavorite()}/>) :
-                    (<FontAwesome name="heart-o" size={22} color='#7ABD7E' className='absolute z-0 bottom-2 right-2 items-center w-6 h-16' onPress={()=> handleFavorite()}/>)
-            }
-        </View>
+      <View className="flex-row">
+        <Text className="text-xs z-1 text-gray-600 text-brown">
+          {distance} mi • Open now
+        </Text>
+      </View>
+
+      {/* favorites btn */}
+      <TouchableOpacity
+        className="absolute bottom-2 right-2"
+        onPress={handleFavorite}
+      >
+        {favorite ? (
+          <FontAwesome name="heart" size={26} color="green" />
+        ) : (
+          <FontAwesome name="heart-o" size={26} color="#7ABD7E" />
+        )}
+      </TouchableOpacity>
     </TouchableOpacity>
   );
 }

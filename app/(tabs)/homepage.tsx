@@ -7,8 +7,6 @@ import HomePageSection from "../components/HomePageSection";
 
 
 export default function HomePage() {
-    console.log("locationData:", data.locationData);
-
     const [selectedSchool, setSelectedSchool] = useState(3);
     const [selectedLocation, setSelectedLocation] = useState(0);
 
