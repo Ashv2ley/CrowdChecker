@@ -18,9 +18,9 @@ export default function HomePage() {
     const parkingLots = data.locationData.filter(location => location.type === 6);
 
     return (
-        <SafeAreaView className="flex-1">
+        <SafeAreaView className="flex-1 bg-cream">
             <ScrollView>
-                <View className="flex-row bg-cream px-4 py-2 gap-x-2">
+                <View className="flex-row px-4 py-2 gap-x-2">
                     <View className="flex-1">
                         <SchoolDropdown
                             selectedValue={selectedSchool}

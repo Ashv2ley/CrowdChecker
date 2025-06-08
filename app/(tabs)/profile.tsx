@@ -1,7 +1,7 @@
-import { View, Text, SafeAreaView, Image, TouchableOpacity, TextInput } from "react-native";
-import React, { useEffect, useState } from "react";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect, useState } from "react";
+import { Image, SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function Profile() {
     type User = {
@@ -53,7 +53,7 @@ export default function Profile() {
     };
 
     return (
-        <SafeAreaView>
+        <SafeAreaView className="flex-1 bg-cream">
             <View className="flex-col items-center p-6 gap-6">
                 <Image
                     source={{ uri: user?.image }}

@@ -1,7 +1,7 @@
-import { View, Text, SafeAreaView } from "react-native";
-import React, { useEffect, useState, useCallback } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "expo-router";
+import React, { useCallback, useState } from "react";
+import { SafeAreaView, Text, View } from "react-native";
 
 export default function Favorites() {
     type User = {
@@ -37,7 +37,7 @@ export default function Favorites() {
     console.log("favorites",user?.favorites)
 
     return (
-        <SafeAreaView>
+        <SafeAreaView className="flex-1 bg-cream">
             <View style={{ padding: 16 }}>
                 <Text style={{ fontWeight: "bold", fontSize: 20, marginBottom: 12 }}>
                     Favorite Location IDs:
