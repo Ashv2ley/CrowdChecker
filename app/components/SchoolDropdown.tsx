@@ -1,6 +1,6 @@
+import { Picker } from '@react-native-picker/picker';
 import React from 'react';
 import { View } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
 
 const SchoolDropdown = ({ selectedValue, onValueChange }) => {
     const schools = [
@@ -16,13 +16,18 @@ const SchoolDropdown = ({ selectedValue, onValueChange }) => {
     ];
 
     return (
-        <View>
+        <View className="flex h-10 py-2.5 px-3 rounded-lg border-2 border-brown justify-center items-center bg-transparent">
             <Picker
                 selectedValue={selectedValue}
                 onValueChange={onValueChange}
+                style={{ flex: 1, width: '100%', color: '#392E2D', backgroundColor: 'transparent' }}
             >
                 {schools.map((school) => (
-                    <Picker.Item key={school.id} label={school.name} value={school.id}/>
+                    <Picker.Item 
+                        key={school.id} 
+                        label={school.name} 
+                        value={school.id} 
+                    />
                 ))}
             </Picker>
         </View>
