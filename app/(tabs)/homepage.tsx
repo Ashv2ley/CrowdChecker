@@ -7,15 +7,24 @@ import HomePageSection from "../components/HomePageSection";
 
 
 export default function HomePage() {
+    console.log("locationData:", data.locationData);
+
     const [selectedSchool, setSelectedSchool] = useState(3);
-    const [selectedLocation, setSelectedLocation] = useState(1);
+    const [selectedLocation, setSelectedLocation] = useState(0);
+
+    // Filtered locationData based on selectedLocation
+    const filteredLocations =
+    selectedLocation === 0
+        ? data.locationData
+        : data.locationData.filter(location => location.type === selectedLocation);
+    
     // amenity arrays
-    const gyms = data.locationData.filter(location => location.type === 1);
-    const diningHalls = data.locationData.filter(location => location.type === 2);
-    const libraries = data.locationData.filter(location => location.type === 3);
-    const buses = data.locationData.filter(location => location.type === 4);
-    const parkingStructures = data.locationData.filter(location => location.type === 5);
-    const parkingLots = data.locationData.filter(location => location.type === 6);
+    const gyms = filteredLocations.filter(location => location.type === 1);
+    const diningHalls = filteredLocations.filter(location => location.type === 2);
+    const libraries = filteredLocations.filter(location => location.type === 3);
+    const buses = filteredLocations.filter(location => location.type === 4);
+    const parkingStructures = filteredLocations.filter(location => location.type === 5);
+    const parkingLots = filteredLocations.filter(location => location.type === 6);
 
     return (
         <SafeAreaView className="flex-1 bg-cream">
@@ -24,23 +33,25 @@ export default function HomePage() {
                     <View className="flex-1">
                         <SchoolDropdown
                             selectedValue={selectedSchool}
-                            onValueChange={(value: number) => setSelectedSchool(value)}
+                            onValueChange={(value: any) => setSelectedSchool(Number(value))}
                         />
                     </View>
                     <View className="flex-1">
                         <LocationDropdown
                             selectedValue={selectedLocation}
-                            onValueChange={(value: number) => setSelectedLocation(value)}
+                            onValueChange={(value: any) => setSelectedLocation(Number(value))}
                         />
                     </View>
                 </View>
 
-                <HomePageSection title="Gyms" cards={gyms} />
-                <HomePageSection title="Dining Halls" cards={diningHalls} />
-                <HomePageSection title="Libraries" cards={libraries} />
-                <HomePageSection title="Buses" cards={buses} />
+                {gyms.length > 0 && <HomePageSection title="Gyms" cards={gyms} />}
+                {diningHalls.length > 0 && <HomePageSection title="Dining Halls" cards={diningHalls} />}
+                {libraries.length > 0 && <HomePageSection title="Libraries" cards={libraries} />}
+                {buses.length > 0 && <HomePageSection title="Buses" cards={buses} />}
+                {parkingStructures.length > 0 && (
                 <HomePageSection title="Parking Structures" cards={parkingStructures} />
-                <HomePageSection title="Parking Lots" cards={parkingLots} />
+                )}
+                {parkingLots.length > 0 && <HomePageSection title="Parking Lots" cards={parkingLots} />}
             </ScrollView>
         </SafeAreaView>
 
