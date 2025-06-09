@@ -7,7 +7,7 @@ const LocationDropdown = ({ selectedValue, onValueChange }) => {
     const locations = data.locations;
 
     return (
-        <View className="flex h-10 py-2.5 px-3 rounded-lg border-2 border-brown justify-center items-center bg-transparent">
+        <View className="flex h-10 py-2.5 px-3 text-xl font-semibold rounded-lg border-2 border-brown justify-center items-center bg-transparent">
             <Picker
                 selectedValue={selectedValue}
                 onValueChange={onValueChange}

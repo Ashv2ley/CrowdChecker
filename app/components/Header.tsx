@@ -32,7 +32,7 @@ export default function Header() {
     }, []);
 
     return (
-        <SafeAreaView className="mt-5">
+        <SafeAreaView className="mt-8 mb-4">
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20}}>
                 <TouchableOpacity onPress={() => router.push("/(tabs)/homepage")}>
                     <Image
