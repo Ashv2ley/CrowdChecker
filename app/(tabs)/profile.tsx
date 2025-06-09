@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, SafeAreaView, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -54,7 +54,16 @@ export default function Profile() {
 
     return (
         <SafeAreaView>
-            <View className="flex-col items-center p-6 gap-6">
+            <ScrollView
+                style={{
+                    padding: 6
+                }}
+                contentContainerStyle={{
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: 6
+                }}
+            >
                 <Image
                     source={{ uri: user?.image }}
                     style={{
@@ -130,7 +139,7 @@ export default function Profile() {
                         <Text className={"flex-row w-full p-4 bg-dark-green rounded-2xl justify-between"} style={{marginTop: 30, gap: 8}}>Save Changes</Text>
                     </TouchableOpacity>
                 )}
-            </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }

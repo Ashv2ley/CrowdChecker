@@ -1,12 +1,14 @@
-import {View, Text, TouchableOpacity, ScrollView, Dimensions} from "react-native";
+import {View, Text, TouchableOpacity, ScrollView, Dimensions, Modal, StyleSheet, TextInput} from "react-native";
+import {SafeAreaView} from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context"
+import { useState } from "react";
 import { BarChart, LineChart } from 'react-native-chart-kit';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import data from "../../data.json"
 import HighCrowd from '../../assets/crowd-level/HighCrowd';
 import LowCrowd from '../../assets/crowd-level/LowCrowd';
 import ModerateCrowd from '../../assets/crowd-level/ModerateCrowd';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 export default function LocationDetails() {
     type Location = {
@@ -34,10 +36,13 @@ export default function LocationDetails() {
         "high": HighCrowd,
     }
     const router = useRouter();
+    const [visible, setVisible] = useState(false);
     const { id } = useLocalSearchParams();
     const locationId = parseInt(id as string, 10);
     const locationData = data.locationData.find((location:Location) => location.id === locationId);
     const IconComponent = iconMap[locationData.currentDensity];
+    const [comment, setComment] = useState<string | null>(null);
+    const [reportedDensity, setReportedDensity] = useState<string | null>(null);
     const LowIcon = iconMap["low"];
     const ModerateIcon = iconMap["moderate"];
     const HighIcon = iconMap["high"];
@@ -68,7 +73,22 @@ export default function LocationDetails() {
         ],
     };
 
+    const handleSubmit = () => {
+        if (comment){
+            locationData.comments.push({
+                text: comment,
+                timeSubmitted: Date.now().toString(),
+            })
+        }
+        locationData.reports.push({
+            density: reportedDensity,
+            timeSubmitted: Date.now().toString(),
+        })
+        setVisible(false);
+    }
+
     return (
+        <SafeAreaView>
         <ScrollView>
             <View className="p-6 gap-8">
                 <View className={"flex-row"} style={{ flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
@@ -76,12 +96,77 @@ export default function LocationDetails() {
                     <Text style={{fontSize:20, fontWeight:"600"}}>{locationData?.name}</Text>
                     <IconComponent/>
                 </View>
-                <View style={{padding:20, backgroundColor:"#7ABD7E", borderRadius:20, alignItems:"center"}}>
+                <TouchableOpacity style={{padding:20, backgroundColor:"#7ABD7E", borderRadius:20, alignItems:"center"}} onPress={() => setVisible(true)}>
                     <Text style={{fontSize:18, fontWeight:"500"}}>Report Current Crowd</Text>
+                </TouchableOpacity>
+                <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                    <Modal
+                        transparent={true}
+                        visible={visible}
+                        animationType="fade"
+                        onRequestClose={() => setVisible(false)}
+                    >
+                        <View
+                            style={{
+                                flex: 1,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                backgroundColor: 'rgba(0,0,0,0.5)' // Optional dimmed background
+                            }}
+                        >
+                            <View
+                                style={{
+                                    width: 300,
+                                    height: 520,
+                                    padding: 20,
+                                    borderRadius: 10,
+                                    alignItems: "center",
+                                    backgroundColor: "white",
+                                }}
+                            >
+                                <TouchableOpacity
+                                    onPress={() => setVisible(false)}
+                                    style={{
+                                        alignSelf: "flex-end",
+                                        marginBottom: 10
+                                    }}
+                                >
+                                    <FontAwesome5 name="times" size={24} color="black" />
+                                </TouchableOpacity>
+                                <Text style={{fontSize:28, fontWeight:"bold", textAlign:"center"}}>{locationData.name}</Text>
+                                <Text style={{fontSize:14, fontWeight:"semibold", textAlign:"center", paddingVertical:5}}>You are reporting the crowd at {new Date().getHours()-12}:{new Date().getMinutes()}PM</Text>
+                                <View style={styles.container}>
+                                    <TouchableOpacity
+                                        onPress={() => setReportedDensity("low")} style={[styles.densityButton,{borderColor:"#7ABD7E"}]}>
+                                        <Text style={[styles.densityText,{color:"#7ABD7E"}]}>Not Crowded</Text>
+                                        <LowIcon/>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => setReportedDensity("moderate")} style={[styles.densityButton,{borderColor:"#FFC571"}]}>
+                                        <Text style={[styles.densityText,{color:"#FFC571"}]}>Moderately Crowded</Text>
+                                        <ModerateIcon/>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => setReportedDensity("high")} style={[styles.densityButton,{borderColor:"#E06666"}]}>
+                                        <Text style={[styles.densityText,{color:"#E06666"}]}>Very Crowded</Text>
+                                        <HighIcon/>
+                                    </TouchableOpacity>
+                                    <TextInput
+                                        onChangeText={(text) => setComment(text)}
+                                        style={styles.input}
+                                        placeholder={"Any comments?"}
+                                        placeholderTextColor={"#6D6D6D"}
+                                    />
+                                </View>
+                                <TouchableOpacity onPress={handleSubmit} style={{borderRadius:12, borderWidth:2, padding:8, width:"90%"}}>
+                                    <Text style={{fontWeight:"bold", fontSize:22, textAlign:"center"}}>Submit Crowd</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </Modal>
                 </View>
+
                 <View className="gap-4">
                     <Text style={{fontSize:20, fontWeight:"500", outlineStyle:"solid", color: "#7ABD7E"}}>Current Reports</Text>
-                    <Text>Student opinions on the crowd at 5–6 PM today</Text>
+                    <Text>Student opinions on the crowd at {new Date().getHours()-12}-{new Date().getHours()-12+1} PM today</Text>
                     <BarChart
                         data={DATA}
                         width={Dimensions.get('window').width - 40}
@@ -120,6 +205,7 @@ export default function LocationDetails() {
                         contentContainerStyle={{
                             flexDirection: "row",
                             gap: 8,
+                            paddingVertical:10
                         }}>
                         {locationData?.comments.map((comment) => (
                             <View
@@ -172,16 +258,15 @@ export default function LocationDetails() {
                         </View>
                     </View>
                 </View>
-
-                <View>
-                    <View>
-                        <Text>Hours</Text>
-                    </View>
-                    <View>
-                        <Text>Location</Text>
-                    </View>
-                </View>
             </View>
         </ScrollView>
+        </SafeAreaView>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {padding:20, width: 250, gap:20},
+    densityButton: { borderRadius:10, padding:5, paddingVertical:8, borderWidth:2, width:'100%', flexDirection:"row",  justifyContent:"space-between", alignItems:"center"},
+    densityText: {fontWeight:"bold", fontSize: 16},
+    input: {borderWidth: 2, borderRadius:10, padding:12, width:"100%"},
+});

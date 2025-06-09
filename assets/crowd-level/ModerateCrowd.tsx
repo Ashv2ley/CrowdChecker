@@ -2,7 +2,7 @@ import React from 'react';
 import { Svg, Circle, Path } from 'react-native-svg';
 
 const ModerateCrowd = () => (
-    <Svg width="40" height="40" viewBox="0 0 131 131" fill="none">
+    <Svg width="30" height="30" viewBox="0 0 131 131" fill="none">
         <Circle cx="65.5" cy="65.5" r="65.5" fill="#FAD5A0" />
         <Path
             fillRule="evenodd"

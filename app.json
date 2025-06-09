@@ -19,7 +19,6 @@
       }
     },
     "web": {
-      "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
@@ -39,9 +38,15 @@
       ],
       "expo-font"
     ],
-
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "86eaad46-df11-4603-b100-cf0d1affe442"
+      }
+    },
+    "owner": "ashley_any"
   }
 }
