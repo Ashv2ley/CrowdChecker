@@ -4,12 +4,8 @@ import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-type HomePageCardProps = {
-  name: string;
-  icon: React.FC;
-};
 
-export default function HomePageCard({name, id, icon, open, close, distance}) {
+export default function HomePageCard({name, id, icon, open, close, distance, fromFavorites = false}) {
     const router = useRouter();
     const IconComponent = icon;
     const openTime = new Date(open).getHours();
@@ -47,19 +43,33 @@ export default function HomePageCard({name, id, icon, open, close, distance}) {
     };
 
     return (
-    <TouchableOpacity className='border-2 rounded-2xl justify-between text-brown p-2 w-56 h-32 relative' onPress={() => router.push(`/locations/${id}`)}>
-
+      <TouchableOpacity
+        className={`border-2 rounded-2xl justify-between text-brown p-2 relative ${
+          fromFavorites ? 'h-36 w-96' : 'h-32 w-56'
+        }`}
+        onPress={() => router.push(`/locations/${id}`)}
+      >
+    
       {/* location */}
-      <Text className='font-semibold text-brown w-32 text-lg'>{name}</Text>
+      <Text       
+        className={`font-semibold text-brown ${
+          fromFavorites ? 'w-48 text-2xl' : 'w-32 text-lg' 
+        }`}>
+          {name}
+        </Text>
 
       {/* crowd level */}
       <View className='absolute z-0 top-2 right-2 flex justify-center items-center w-16 h-16'>
-        <IconComponent size={60} />
+        <IconComponent size={fromFavorites ? 80 : 60} />
       </View>
 
       {/* details */}
       <View className="flex-row">
-        <Text className="text-xs z-1 text-gray-600 text-brown">
+        <Text 
+          className={`z-1 text-gray-600 text-brown ${
+            fromFavorites ? 'text-sm' : 'text-xs' 
+          }`}
+        >
           {distance} mi • Open now
         </Text>
       </View>
@@ -70,7 +80,7 @@ export default function HomePageCard({name, id, icon, open, close, distance}) {
         onPress={handleFavorite}
       >
         {favorite ? (
-          <FontAwesome name="heart" size={26} color="green" />
+          <FontAwesome name="heart" size={26} color="#7ABD7E" />
         ) : (
           <FontAwesome name="heart-o" size={26} color="#7ABD7E" />
         )}
