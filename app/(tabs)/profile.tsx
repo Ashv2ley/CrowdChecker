@@ -54,23 +54,37 @@ export default function Profile() {
 
     return (
         <SafeAreaView className="flex-1 bg-cream">
-            <View className="flex-col items-center p-6 gap-6">
-                <Image
-                    source={{ uri: user?.image }}
-                    style={{
+            <View className="flex-col items-center p-6 gap-2">
+            <View
+                style={{
+                    width: 260,
+                    height: 260,
+                    borderRadius: 130,
+                    borderColor: "#7ABD7E",
+                    borderWidth: 5,
+                    shadowColor: "#7ABD7E",
+                    shadowOffset: { width: 0, height: 0 },
+                    shadowOpacity: 0.9,
+                    shadowRadius: 30,
+                    elevation: 10, 
+                    backgroundColor: 'transparent',
+                }}
+                >
+                    <Image
+                        source={{ uri: user?.image }}
+                        style={{
                         width: 250,
                         height: 250,
-                        borderRadius: 250,
-                        borderColor: "#7ABD7E",
-                        borderWidth: 5,
-                        shadowColor: "#7ABD7E",
-                        shadowRadius: 250,
-                    }}
-                    resizeMode="contain"
-                />
+                        borderRadius: 125,
+                        overflow: "hidden",
+                        }}
+                        resizeMode="contain"
+                    />
+                </View>
+
 
                 {/* Full Name */}
-                <View className={"flex-row w-full p-4 border-2 border-black rounded-2xl justify-between"} style={{marginTop: 30, gap: 8}}>
+                <View className={"flex-row w-full p-4 border-2 border-black rounded-2xl justify-between mt-6"}>
                     {editMode ? (
                         <TextInput
                             className="text-xl font-semibold flex-1"
@@ -96,7 +110,7 @@ export default function Profile() {
                 </View>
 
                 {/* Email */}
-                <View className={"flex-row w-full p-4 border-2 border-black rounded-2xl justify-between"} style={{marginTop: 30, gap: 8}}>
+                <View className={"flex-row w-full p-4 border-2 border-black rounded-2xl justify-between mt-4"}>
                     {editMode ? (
                         <TextInput
                             className="text-xl font-semibold flex-1"
@@ -117,8 +131,10 @@ export default function Profile() {
                 </View>
 
                 {/* Crowd Level Preferences Placeholder */}
-                <TouchableOpacity className={"w-full rounded-2xl"} style={{marginTop: 30, gap: 8, backgroundColor:"#7ABD7E", padding:22}}>
-                    <Text style={{fontWeight:"500", fontSize:18, textAlign:"center"}}>Edit Crowd Level Preferences</Text>
+                <TouchableOpacity className={"w-full rounded-2xl mt-4 bg-dark-green"} style={{padding:22}}>
+                    <Text style={{fontWeight:"500", fontSize:18, textAlign:"center"}}>
+                        Edit Crowd Level Preferences
+                    </Text>
                 </TouchableOpacity>
 
                 {/* Save Button */}
@@ -127,7 +143,9 @@ export default function Profile() {
                         onPress={handleSave}
                         className="border px-4 py-2 rounded-xl"
                     >
-                        <Text className={"flex-row w-full p-4 bg-dark-green rounded-2xl justify-between"} style={{marginTop: 30, gap: 8}}>Save Changes</Text>
+                        <Text className={"flex-row w-full p-4 bg-dark-green rounded-2xl justify-between mt-4"}>
+                            Save Changes
+                        </Text>
                     </TouchableOpacity>
                 )}
             </View>
