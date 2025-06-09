@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 
-export default function HomePageCard({name, id, icon, open, close, distance, fromFavorites = false}) {
+export default function PlaceCard({name, id, icon, open, close, distance, fromFavorites = false}) {
     const router = useRouter();
     const IconComponent = icon;
     const openTime = new Date(open).getHours();

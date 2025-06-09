@@ -6,7 +6,7 @@ import HighCrowd from '../../assets/crowd-level/HighCrowd';
 import LowCrowd from '../../assets/crowd-level/LowCrowd';
 import ModerateCrowd from '../../assets/crowd-level/ModerateCrowd';
 import data from "../../data.json";
-import HomePageCard from "../components/HomePageCard";
+import PlaceCard from "../components/PlaceCard";
 
 
 type User = {
@@ -60,7 +60,7 @@ export default function Favorites() {
                 {favoriteCards.map((location) => {
                     const IconComponent = iconMap[location.currentDensity]; 
                     return (
-                        <HomePageCard
+                        <PlaceCard
                         key={location.id}
                         name={location.name}
                         id={location.id}
