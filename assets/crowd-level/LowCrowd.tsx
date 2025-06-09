@@ -5,7 +5,7 @@ type LowCrowdProps = {
   size?: number;
 };
 
-const LowCrowd: React.FC<ModerateCrowdProps> = ({ size = 40 }) => (
+const LowCrowd: React.FC<LowCrowdProps> = ({ size = 40 }) => (
   <Svg
     width={size}
     height={size}
