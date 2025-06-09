@@ -13,12 +13,12 @@
    ```
 
 ## To deploy the app:
-1. Install dependencies
+1. 
    ```
    npm run pre-deploy
    ```
 
-2. Start the app
+2. 
    ```
    npm run deploy
    ```
