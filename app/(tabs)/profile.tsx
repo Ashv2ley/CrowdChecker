@@ -1,7 +1,7 @@
+import { View, Text, SafeAreaView, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState } from "react";
-import { Image, SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function Profile() {
     type User = {
@@ -53,38 +53,33 @@ export default function Profile() {
     };
 
     return (
-        <SafeAreaView className="flex-1 bg-cream">
-            <View className="flex-col items-center p-6 gap-2">
-            <View
+        <SafeAreaView>
+            <ScrollView
                 style={{
-                    width: 260,
-                    height: 260,
-                    borderRadius: 130,
-                    borderColor: "#7ABD7E",
-                    borderWidth: 5,
-                    shadowColor: "#7ABD7E",
-                    shadowOffset: { width: 0, height: 0 },
-                    shadowOpacity: 0.9,
-                    shadowRadius: 30,
-                    elevation: 10, 
-                    backgroundColor: 'transparent',
+                    padding: 6
                 }}
-                >
-                    <Image
-                        source={{ uri: user?.image }}
-                        style={{
+                contentContainerStyle={{
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: 6
+                }}
+            >
+                <Image
+                    source={{ uri: user?.image }}
+                    style={{
                         width: 250,
                         height: 250,
-                        borderRadius: 125,
-                        overflow: "hidden",
-                        }}
-                        resizeMode="contain"
-                    />
-                </View>
-
+                        borderRadius: 250,
+                        borderColor: "#7ABD7E",
+                        borderWidth: 5,
+                        shadowColor: "#7ABD7E",
+                        shadowRadius: 250,
+                    }}
+                    resizeMode="contain"
+                />
 
                 {/* Full Name */}
-                <View className={"flex-row w-full p-4 border-2 border-black rounded-2xl justify-between mt-6"}>
+                <View className={"flex-row w-full p-4 border-2 border-black rounded-2xl justify-between"} style={{marginTop: 30, gap: 8}}>
                     {editMode ? (
                         <TextInput
                             className="text-xl font-semibold flex-1"
@@ -110,7 +105,7 @@ export default function Profile() {
                 </View>
 
                 {/* Email */}
-                <View className={"flex-row w-full p-4 border-2 border-black rounded-2xl justify-between mt-4"}>
+                <View className={"flex-row w-full p-4 border-2 border-black rounded-2xl justify-between"} style={{marginTop: 30, gap: 8}}>
                     {editMode ? (
                         <TextInput
                             className="text-xl font-semibold flex-1"
@@ -131,24 +126,20 @@ export default function Profile() {
                 </View>
 
                 {/* Crowd Level Preferences Placeholder */}
-                <TouchableOpacity className={"w-full rounded-2xl mt-4 bg-dark-green"} style={{padding:22}}>
-                    <Text style={{fontWeight:"500", fontSize:18, textAlign:"center"}}>
-                        Edit Crowd Level Preferences
-                    </Text>
+                <TouchableOpacity className={"w-full rounded-2xl"} style={{marginTop: 30, gap: 8, backgroundColor:"#7ABD7E", padding:22}}>
+                    <Text style={{fontWeight:"500", fontSize:18, textAlign:"center"}}>Edit Crowd Level Preferences</Text>
                 </TouchableOpacity>
 
                 {/* Save Button */}
                 {editMode && (
                     <TouchableOpacity
                         onPress={handleSave}
-                        className="border px-4 py-2 rounded-xl"
+                        className="px-4 py-2 rounded-xl"
                     >
-                        <Text className={"flex-row w-full p-4 bg-dark-green rounded-2xl justify-between mt-4"}>
-                            Save Changes
-                        </Text>
+                        <Text className={"flex-row w-full p-4 bg-dark-green rounded-2xl justify-between"} style={{marginTop: 30, gap: 8}}>Save Changes</Text>
                     </TouchableOpacity>
                 )}
-            </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
