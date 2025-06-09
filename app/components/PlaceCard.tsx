@@ -1,9 +1,21 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
+type User = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+  isRemembered: boolean;
+  isLoggedIn: boolean;
+  timeJoined: string;
+  image: string;
+  preferences: {};
+  favorites: number[],
+};
 
 export default function PlaceCard({name, id, icon, open, close, distance, fromFavorites = false}) {
     const router = useRouter();
@@ -12,18 +24,22 @@ export default function PlaceCard({name, id, icon, open, close, distance, fromFa
     const closeTime = new Date(close).getHours();
     const [favorite, setFavorite] = React.useState(false);
     const [user, setUser] =  useState<User | null>(null)
-    type User = {
-        firstname: string;
-        lastname: string;
-        email: string;
-        password: string;
-        isRemembered: boolean;
-        isLoggedIn: boolean;
-        timeJoined: string;
-        image: string;
-        preferences: {};
-        favorites: number[],
-    };
+
+    useEffect(() => {
+      const fetchUserAndCheckFavorite = async () => {
+        const storedUser = await AsyncStorage.getItem("user");
+        const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+  
+        if (parsedUser) {
+          setUser(parsedUser);
+          const isFavorite = parsedUser.favorites.includes(id);
+          setFavorite(isFavorite);
+        }
+      };
+  
+      fetchUserAndCheckFavorite();
+    }, [id]);
+
 
     const handleFavorite = async () => {
         const storedUser = await AsyncStorage.getItem("user");
@@ -79,7 +95,7 @@ export default function PlaceCard({name, id, icon, open, close, distance, fromFa
         className="absolute bottom-2 right-2"
         onPress={handleFavorite}
       >
-        {favorite ? (
+        {favorite || fromFavorites ? (
           <FontAwesome name="heart" size={26} color="#7ABD7E" />
         ) : (
           <FontAwesome name="heart-o" size={26} color="#7ABD7E" />
